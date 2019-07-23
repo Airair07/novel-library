@@ -1,0 +1,15 @@
+<div class="text-right">
+  <% if current_user == @novel.user %>
+    <%= link_to "削除", @novel, method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger btn-sm' %>
+  <% end %>
+</div>
+
+<div class="text-center mb-4">
+<p><h2><%= @novel.title %></h2></p>
+</div>
+<div class="text-right mb-4">
+<p>作者：<%= link_to @novel.user.name,user_path(@novel.user) %></p>
+</div>
+<div class="text-center mb-4">
+<%= simple_format(@novel.story) %>
+</div>
