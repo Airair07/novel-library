@@ -4,6 +4,11 @@ class NovelsController < ApplicationController
   
   def show
     @novel = Novel.find_by(id: params[:id])
+    @episodes = @novel.episodes.order(:number)
+    
+    if (@episodes.empty?) && (current_user != @novel.user)
+    redirect_to root_url
+    end
   end
 
   def new
@@ -13,7 +18,7 @@ class NovelsController < ApplicationController
   def create
     @novel = current_user.novels.build(novel_params)
     if @novel.save
-      flash[:success] = '小説を作成しました。'
+      flash[:success] = '小説を作成しました。投稿を完了するために1話以上作成してください。'
       redirect_to @novel
     else
       flash.now[:danger] = '小説の作成に失敗しました。'

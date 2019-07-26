@@ -7,7 +7,7 @@
     <div class="border pl-3 pt-2">
       <p><%= link_to 'ホーム',user_path(current_user) %></p>
       <p><a href="#">新規小説投稿</a></p>
-      <p><a href="#">お気に入り小説</a></p>
+      <p><%= link_to 'お気に入り小説',likes_user_path(current_user) %></p>
     </div>
   </aside>
   <div class="col-sm-8">
@@ -15,12 +15,12 @@
     <%= render 'layouts/error_messages', model: f.object %>
       
       <div class="form-group">
-        <%= f.label :title, '作品タイトル' %>
+        <%= f.label :title, '作品タイトル(100文字以内)' %>
         <%= f.text_field :title, class: 'form-control' %>
       </div>
 
       <div class="form-group">
-        <%= f.label :story, 'あらすじ' %>
+        <%= f.label :story, 'あらすじ(1000文字以内)' %>
         <%= f.text_area :story, class: 'form-control', rows: 10 %>
       </div>
 

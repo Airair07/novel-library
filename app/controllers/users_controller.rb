@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @novels = @user.novels.order(id: :desc).page(params[:page])
+    
     counts(@user)
   end
 
@@ -14,11 +15,17 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
-      redirect_to @user
+      redirect_to login_path
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
     end
+  end
+  
+  def likes
+    @user = User.find(params[:id])
+    @likes = @user.likes.order(id: :desc).page(params[:page])
+    counts(@user)
   end
   
   private

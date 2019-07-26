@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   end
   
   def counts(user)
-    @count_novels = user.novels.count
+    @count_novels = user.novels.count {|novel| !novel.episodes.empty? }
+    @count_likes = user.likes.count
   end
   
 end

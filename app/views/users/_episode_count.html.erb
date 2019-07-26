@@ -1,0 +1,5 @@
+<% if novel.episodes.count == 0 %>
+  (<%= link_to '未投稿', episode_write_novel_path(novel) %>)
+<% else %>
+  (全<%= novel.episodes.count %>話)
+<% end %>
