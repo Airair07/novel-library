@@ -13,13 +13,13 @@ Rails.application.routes.draw do
   end
   
   get 'novel-write', to: 'novels#new'
-  resources :novels, only: [:show, :create, :destroy] do
+  resources :novels, only: [:show, :update, :edit, :create, :destroy] do
     member do
       get 'episode-write', to: 'episodes#new'
       resources :episodes, only: [:create]
     end
     collection do
-      resources :episodes, only: [:show, :destroy]
+      resources :episodes, only: [:show, :destroy, :update, :edit]
     end
   end
   

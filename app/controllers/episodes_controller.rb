@@ -1,6 +1,6 @@
 class EpisodesController < ApplicationController
-  before_action :require_user_logged_in, only: [:new, :create, :destroy]
-  before_action :correct_user, only: [:destroy]
+  before_action :require_user_logged_in, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   
   def show
     @episode = Episode.find_by(id: params[:id])
@@ -20,6 +20,20 @@ class EpisodesController < ApplicationController
     else
       flash.now[:danger] = '本文の投稿に失敗しました。'
       render 'new'
+    end
+  end
+  
+  def edit
+  end
+  
+  def update
+
+    if @episode.update(episode_params)
+      flash[:success] = '更新に成功しました'
+      redirect_to @episode
+    else
+      flash.now[:danger] = '更新に失敗しました'
+      render :edit
     end
   end
 

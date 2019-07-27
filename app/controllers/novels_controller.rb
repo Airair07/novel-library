@@ -1,6 +1,6 @@
 class NovelsController < ApplicationController
-  before_action :require_user_logged_in, only: [:new, :create, :destroy]
-  before_action :correct_user, only: [:destroy]
+  before_action :require_user_logged_in, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   
   def show
     @novel = Novel.find_by(id: params[:id])
@@ -23,6 +23,20 @@ class NovelsController < ApplicationController
     else
       flash.now[:danger] = '小説の作成に失敗しました。'
       render 'new'
+    end
+  end
+  
+  def edit
+  end
+  
+  def update
+
+    if @novel.update(novel_params)
+      flash[:success] = '更新に成功しました'
+      redirect_to @novel
+    else
+      flash.now[:danger] = '更新に失敗しました'
+      render :edit
     end
   end
 

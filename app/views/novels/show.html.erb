@@ -6,7 +6,9 @@
   <div class="col-6">
     <%= link_to "新規本文作成", episode_write_novel_path, class: 'btn btn-primary btn-sm' %>
   </div>
+
   <div class="col-6 text-right">
+    <%= link_to "編集", edit_novel_path(@novel), class: 'btn btn-primary btn-sm' %>
     <%= link_to "削除", @novel, method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger btn-sm' %>
   </div>
 </div>
